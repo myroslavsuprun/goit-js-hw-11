@@ -74,7 +74,7 @@ function createOnePictureCardMarkUp(pictureResult) {
   const cardMarkUp = `
     <div class="col mb-3">
         <div class="photo-card card">
-            <img src="${webformatURL}" alt="${tags}" class="card-img-top figure-img" loading="lazy" />
+            <img src="${webformatURL}" alt="${tags}" class="card-img-top img-fluid card-img" loading="lazy"/>
             <div class="info card-body d-flex justify-content-center text-center">
                 <p class="info-item card-text d-flex flex-column me-2">
                     <b>Likes</b>
