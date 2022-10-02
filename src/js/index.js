@@ -2,7 +2,7 @@
 import 'modern-normalize';
 import '../scss/styles.scss';
 // JS files
-import './ref-el';
+import { ref } from './ref-el';
 import { fetchPictures, paginationInfo } from './fetchPictures';
 // Libraries
 import * as bootstrap from 'bootstrap';
