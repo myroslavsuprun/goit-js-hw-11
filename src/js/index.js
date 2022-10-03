@@ -20,6 +20,10 @@ async function onLoadMoreBtnClick(e) {
   try {
     const countryResponse = await fetchPictures(searchForm.searchQuery.value);
 
+    if (countryResponse.hits.length < 40) {
+      loadMoreBtn.classList.add('visually-hidden');
+    }
+
     if (countryResponse.hits.length === 0) {
       Notiflix.Notify.failure(
         "We're sorry, but you've reached the end of search results."
@@ -38,12 +42,19 @@ async function onLoadMoreBtnClick(e) {
 async function onSearchFormSubmit(e) {
   e.preventDefault();
   const searchInput = searchForm.searchQuery.value;
+
   try {
     if (imageSearchRequest !== searchInput) {
       cardWrapper.innerHTML = '';
     }
 
     const countryResponse = await fetchPictures(searchInput);
+
+    if (countryResponse.hits.length < 40) {
+      loadMoreBtn.classList.add('visually-hidden');
+    } else {
+      loadMoreBtn.classList.remove('visually-hidden');
+    }
 
     if (countryResponse.totalHits === 0) {
       throw new Error('');
@@ -54,7 +65,6 @@ async function onSearchFormSubmit(e) {
     );
 
     createPicturesCardMarkUp(countryResponse.hits);
-    loadMoreBtn.classList.remove('visually-hidden');
   } catch {
     Notiflix.Notify.failure(
       'Sorry, there are no images matching your search query. Please try again.'
@@ -73,8 +83,8 @@ function createOnePictureCardMarkUp(pictureResult) {
 
   const cardMarkUp = `
     <div class="col mb-3">
-        <div class="photo-card card">
-            <img src="${webformatURL}" alt="${tags}" class="card-img-top img-fluid card-img" loading="lazy"/>
+        <div class="photo-card card" style="height: 100%; max-height: 400px;">
+            <img src="${webformatURL}" alt="${tags}" class="card-img-top img-fluid card-img" loading="lazy" style="height: 300px; object-fit: cover" />
             <div class="info card-body d-flex justify-content-center text-center">
                 <p class="info-item card-text d-flex flex-column me-2">
                     <b>Likes</b>

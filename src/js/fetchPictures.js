@@ -1,4 +1,6 @@
+import axios from 'axios';
 import Notiflix from 'notiflix';
+// const axios = require('axios');
 
 const BASE_URL = 'https://pixabay.com/api/';
 const API_KEY = '30287979-f096ac17a6ade7f989feb3ac6';
@@ -26,16 +28,14 @@ async function fetchPictures(pictureName) {
       paginationInfo.setImageRequestNumberValue(1);
     }
 
-    const response = await fetch(
+    const response = await axios.get(
       `${BASE_URL}/?key=${API_KEY}&q=${pictureName}&image_type=photo&orientation=horizontal&safesearch=true&per_page=40&page=${paginationInfo.imageRequestNumber}`
     );
-
-    const responseJSON = await response.json();
 
     paginationInfo.updateImageSearchRequest(pictureName);
     paginationInfo.incrementImageRequestNumber();
 
-    return responseJSON;
+    return response.data;
   } catch (r) {
     Notiflix.Notify.failure(r);
   }
