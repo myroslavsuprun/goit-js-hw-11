@@ -5,7 +5,6 @@ import '../scss/styles.scss';
 import { ref } from './ref-el';
 import { fetchPictures, paginationInfo } from './fetchPictures';
 // Libraries
-import * as bootstrap from 'bootstrap';
 import Notiflix from 'notiflix';
 
 const { searchForm, cardWrapper, loadMoreBtn } = ref;
@@ -78,8 +77,7 @@ function createPicturesCardMarkUp(results) {
 }
 
 function createOnePictureCardMarkUp(pictureResult) {
-  let { webformatURL, largeImageURL, tags, likes, views, comments, downloads } =
-    pictureResult;
+  let { webformatURL, tags, likes, views, comments, downloads } = pictureResult;
 
   const cardMarkUp = `
     <div class="col mb-3">
